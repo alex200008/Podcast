@@ -1,4 +1,6 @@
--[ ] From list of podcast to rendered page of podcasts
+-[x] From list of podcast to rendered page of podcasts
+  - [x] Image
+  - [x] Title
 -[ ] From selected podcast to rendered page of episodes
 -[ ] From podcast/episodes page add filter for all episode
 -[ ] From podcast/episodes add "add button"

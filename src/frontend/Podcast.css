@@ -1,8 +1,10 @@
 .Podcast {
-
+ display: flex;
+ align-items: center;
 }
 .Podcast-image {
-
+ width: 200px;
+ height: 200px;
 }
 .Podcast-title {
 
