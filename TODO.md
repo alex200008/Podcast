@@ -1,0 +1,6 @@
+-[ ] From list of podcast to rendered page of podcasts
+-[ ] From selected podcast to rendered page of episodes
+-[ ] From podcast/episodes page add filter for all episode
+-[ ] From podcast/episodes add "add button"
+-[ ] Can play an episode
+-[ ] Add persistence
