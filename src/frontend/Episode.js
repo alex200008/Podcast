@@ -14,8 +14,8 @@ function Episode({episode}) {
 
     return <div className="Episode">
         <h3 className="Episode-title">{episode.title}</h3>
-        <text className="Episode-description">{episode.description}</text>
-        <text className="Episode-release">{episode.release}</text>
+        <p className="Episode-description">{episode.description}</p>
+        <p className="Episode-release">{episode.release}</p>
         <button onClick={start} className="Episode-button">play/pause</button>
     </div>
 }

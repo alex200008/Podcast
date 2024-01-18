@@ -5,6 +5,6 @@
   - [x] navigation from podcast page (go and back)
   - [x] title description release
 -[ ] From podcast/episodes page add filter for all episode
--[ ] From podcast/episodes add "add button"
+-[x] From podcast/episodes add "add button"
 -[x] Can play an episode
 -[ ] Add persistence

@@ -2,18 +2,19 @@ import './App.css';
 
 import './frontend/Podcast'
 import PodcastList from "./frontend/PodcastList";
-import EpisodeListe from "./frontend/EpisodeListe";
+import EpisodeList from "./frontend/EpisodeList";
+import {useState} from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
 function App() {
-    const podcastData = [
+    const [podcastData, setPodcastData] = useState([
         {img: "./logo192.png", title: "Podcast 1", id: 0},
         {img: "./logo192.png", title: "Podcast 2", id: 1},
         {img: "./logo192.png", title: "Podcast 3", id: 2},
         {img: "./logo192.png", title: "Podcast 4", id: 3}
-    ];
-
-    const episodeData = [
+    ])
+    const [episodeData, setEpisodeData] = useState([
         {
             podcastId: 0,
             id: 0,
@@ -46,28 +47,36 @@ function App() {
             release: "29/02/2023",
             url: "https://ia601303.us.archive.org/32/items/jean-toba-le-manege-pour-les-antilles/JeanToba-LeManegePourLesAntilles.mp3"
         }
-    ];
+    ])
 
-    // get podcast url and id
-    const queryParameters = new URLSearchParams(window.location.search)
-    const id = queryParameters.get("id")
-    let selectedPodcast;
-    if (id != null) {
-        selectedPodcast = podcastData.find(podcast => podcast.id.toString() === id)
+    const addPodcast = podcast => {
+        setPodcastData([
+            ...podcastData,
+            podcast
+        ])
     }
 
-    let main;
-
-    if (selectedPodcast !== undefined) {
-        main = <EpisodeListe data={episodeData} podcast={selectedPodcast}/>
-    } else {
-        main = <PodcastList data={podcastData}/>
+    const addEpisode = episode => {
+        setEpisodeData([
+            ...episodeData,
+            episode
+        ])
     }
+
 
     return (
         <div className="App">
             <header className="App-header">
-                {main}
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={
+                            <PodcastList data={podcastData} adder={addPodcast}/>
+                        }/>
+                        <Route path="/podcast" element={
+                            <EpisodeList episodeData={episodeData} podcastData={podcastData} adder={addEpisode}/>
+                        }/>
+                    </Routes>
+                </BrowserRouter>
             </header>
         </div>
     );
