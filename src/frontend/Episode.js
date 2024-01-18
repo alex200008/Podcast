@@ -1,7 +1,7 @@
 import "./Episode.css"
 
-function Episode({title, description, release, url}) {
-    const audio = new Audio(url)
+function Episode({episode}) {
+    const audio = new Audio(episode.url)
 
     const start = () => {
         if (audio.paused) {
@@ -13,9 +13,9 @@ function Episode({title, description, release, url}) {
 
 
     return <div className="Episode">
-        <h3 className="Episode-title">{title}</h3>
-        <text className="Episode-description">{description}</text>
-        <text className="Episode-release">{release}</text>
+        <h3 className="Episode-title">{episode.title}</h3>
+        <text className="Episode-description">{episode.description}</text>
+        <text className="Episode-release">{episode.release}</text>
         <button onClick={start} className="Episode-button">play/pause</button>
     </div>
 }
