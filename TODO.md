@@ -1,8 +1,10 @@
 -[x] From list of podcast to rendered page of podcasts
   - [x] Image
   - [x] Title
--[ ] From selected podcast to rendered page of episodes
+-[x] From selected podcast to rendered page of episodes
+  - [x] navigation from podcast page (go and back)
+  - [x] title description release
 -[ ] From podcast/episodes page add filter for all episode
 -[ ] From podcast/episodes add "add button"
--[ ] Can play an episode
+-[x] Can play an episode
 -[ ] Add persistence

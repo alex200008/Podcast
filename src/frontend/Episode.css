@@ -1,5 +1,6 @@
 .Episode {
-
+    display: flex;
+    align-items: center;
 }
 .Episode-title {
 
