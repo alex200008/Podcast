@@ -1,5 +1,6 @@
 import Podcast from "./Podcast";
 import {useState} from "react";
+import { uid } from 'uid';
 
 function PodcastList({data, adder}) {
     const podcastList = data.map(podcast => <Podcast key={podcast.id} podcast={podcast} active={false}/>)
@@ -18,7 +19,7 @@ function PodcastList({data, adder}) {
         const data = Object.fromEntries(formData.entries())
 
         const podcast = {
-            id: 50,
+            id: uid(),
             title: data.title,
             img: file
         }

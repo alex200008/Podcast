@@ -8,3 +8,4 @@
 -[x] From podcast/episodes add "add button"
 -[x] Can play an episode
 -[ ] Add persistence
+-[ ] Fix image

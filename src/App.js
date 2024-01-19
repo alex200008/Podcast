@@ -13,24 +13,22 @@ class App extends Component{
         episodeData: []
     }
 
+    // get data from back
     componentDidMount() {
         getPodcasts(data => this.setState({podcastData: data}))
         getEpisodes(data => this.setState({episodeData: data}))
     }
+    // update back and react
     addPodcast(podcast) {
-        this.setState({podcastData: [
-                ...this.state.podcastData,
-                podcast
-            ]})
-        savePodcasts(this.state.podcastData)
+        const newData = [...this.state.podcastData, podcast]
+        this.setState({podcastData: newData})
+        savePodcasts(newData)
     }
-
+    // update back and react
     addEpisode(episode) {
-        this.setState({episodeData: [
-                ...this.state.episodeData,
-                episode
-            ]})
-        saveEpisodes(this.state.episodeData)
+        const newData = [...this.state.episodeData, episode]
+        this.setState({episodeData: newData})
+        saveEpisodes(newData)
     }
 
     render () {

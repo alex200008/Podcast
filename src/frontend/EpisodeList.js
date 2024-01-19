@@ -1,5 +1,6 @@
 import Episode from "./Episode";
 import Podcast from "./Podcast";
+import {uid} from "uid";
 
 function EpisodeList({episodeData, podcastData, adder}) {
     // get podcast id
@@ -20,7 +21,7 @@ function EpisodeList({episodeData, podcastData, adder}) {
 
         const podcast = {
             podcastId: selectedPodcast.id,
-            id: 50,
+            id: uid(),
             title: data.title,
             description: data.description,
             release: data.date,
