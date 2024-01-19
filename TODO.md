@@ -9,6 +9,6 @@
 -[x] Can play an episode
 -[ ] Add persistence
   - [x] Front data
-  - [ ] Front image
+  - [x] Front image
   - [ ] Back data
   - [ ] Back image

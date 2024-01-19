@@ -5,7 +5,7 @@ import PodcastList from "./frontend/PodcastList";
 import EpisodeList from "./frontend/EpisodeList";
 import {Component} from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {getPodcasts, savePodcasts, getEpisodes, saveEpisodes} from "./Api";
+import {getPodcasts, savePodcasts, getEpisodes, saveEpisodes, saveImage} from "./Api";
 import SearchPage from "./frontend/SearchPage";
 
 class App extends Component {
@@ -21,10 +21,11 @@ class App extends Component {
     }
 
     // update back and react
-    addPodcast(podcast) {
+    addPodcast(podcast, img) {
         const newData = [...this.state.podcastData, podcast]
         this.setState({podcastData: newData})
         savePodcasts(newData)
+        saveImage(img, podcast.id)
     }
 
     // update back and react
@@ -42,7 +43,7 @@ class App extends Component {
                         <Routes>
                             <Route path="/" element={
                                 <PodcastList data={this.state.podcastData}
-                                             adder={(podcast) => this.addPodcast(podcast)}/>
+                                             adder={(podcast, img) => this.addPodcast(podcast, img)}/>
                             }/>
                             <Route path="/podcast" element={
                                 <EpisodeList episodeData={this.state.episodeData} podcastData={this.state.podcastData}

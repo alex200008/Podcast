@@ -6,10 +6,11 @@ import {Link} from "react-router-dom";
 function PodcastList({data, adder}) {
     const podcastList = data.map(podcast => <Podcast key={podcast.id} podcast={podcast} active={false}/>)
 
-    const [file , setFile] = useState()
+    const [file , setFile] = useState({url:""})
 
     function handleChange(e) {
-        setFile(URL.createObjectURL(e.target.files[0]))
+        const newFile = {url: URL.createObjectURL(e.target.files[0]), img: e.target.files[0]}
+        setFile(newFile)
     }
 
     const addPodcast = (e) => {
@@ -22,9 +23,9 @@ function PodcastList({data, adder}) {
         const podcast = {
             id: uid(),
             title: data.title,
-            img: file
+            img: file.url
         }
-        adder(podcast)
+        adder(podcast, file.img)
     }
 
     return (
@@ -35,7 +36,7 @@ function PodcastList({data, adder}) {
             <form method="post" onSubmit={addPodcast}>
                 <input type="text" id="podcast_title" name="title"/>
                 <input type="file" accept="image/*" onChange={handleChange}/>
-                <img src={file} alt="" width="100px" height="100px"/>
+                <img src={file.url} alt="" width="100px" height="100px"/>
                 <button type="submit">Add new podcast</button>
             </form>
             <ul>{podcastList}</ul>
