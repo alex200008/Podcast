@@ -3,83 +3,54 @@ import './App.css';
 import './frontend/Podcast'
 import PodcastList from "./frontend/PodcastList";
 import EpisodeList from "./frontend/EpisodeList";
-import {useState} from "react";
+import {Component} from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {getPodcasts, savePodcasts, getEpisodes, saveEpisodes} from "./api";
 
-
-function App() {
-    const [podcastData, setPodcastData] = useState([
-        {img: "./logo192.png", title: "Podcast 1", id: 0},
-        {img: "./logo192.png", title: "Podcast 2", id: 1},
-        {img: "./logo192.png", title: "Podcast 3", id: 2},
-        {img: "./logo192.png", title: "Podcast 4", id: 3}
-    ])
-    const [episodeData, setEpisodeData] = useState([
-        {
-            podcastId: 0,
-            id: 0,
-            title: "Episode 1",
-            description: "First episode !",
-            release: "03/01/2000",
-            url: "https://ia601303.us.archive.org/32/items/jean-toba-le-manege-pour-les-antilles/JeanToba-LeManegePourLesAntilles.mp3"
-        },
-        {
-            podcastId: 0,
-            id: 1,
-            title: "Episode 2",
-            description: "The best episode !",
-            release: "07/02/2024",
-            url: "https://ia601303.us.archive.org/32/items/jean-toba-le-manege-pour-les-antilles/JeanToba-LeManegePourLesAntilles.mp3"
-        },
-        {
-            podcastId: 1,
-            id: 2,
-            title: "Episode 3",
-            description: "I'm an episode",
-            release: "01/01/1",
-            url: "https://ia601303.us.archive.org/32/items/jean-toba-le-manege-pour-les-antilles/JeanToba-LeManegePourLesAntilles.mp3"
-        },
-        {
-            podcastId: 1,
-            id: 3,
-            title: "Episode 4",
-            description: "Hello World !",
-            release: "29/02/2023",
-            url: "https://ia601303.us.archive.org/32/items/jean-toba-le-manege-pour-les-antilles/JeanToba-LeManegePourLesAntilles.mp3"
-        }
-    ])
-
-    const addPodcast = podcast => {
-        setPodcastData([
-            ...podcastData,
-            podcast
-        ])
+class App extends Component{
+    state = {
+        podcastData: [],
+        episodeData: []
     }
 
-    const addEpisode = episode => {
-        setEpisodeData([
-            ...episodeData,
-            episode
-        ])
+    componentDidMount() {
+        getPodcasts(data => this.setState({podcastData: data}))
+        getEpisodes(data => this.setState({episodeData: data}))
+    }
+    addPodcast(podcast) {
+        this.setState({podcastData: [
+                ...this.state.podcastData,
+                podcast
+            ]})
+        savePodcasts(this.state.podcastData)
     }
 
+    addEpisode(episode) {
+        this.setState({episodeData: [
+                ...this.state.episodeData,
+                episode
+            ]})
+        saveEpisodes(this.state.episodeData)
+    }
 
-    return (
+    render () {
+        return (
         <div className="App">
             <header className="App-header">
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={
-                            <PodcastList data={podcastData} adder={addPodcast}/>
+                            <PodcastList data={this.state.podcastData} adder={(podcast) => this.addPodcast(podcast)}/>
                         }/>
                         <Route path="/podcast" element={
-                            <EpisodeList episodeData={episodeData} podcastData={podcastData} adder={addEpisode}/>
+                            <EpisodeList episodeData={this.state.episodeData} podcastData={this.state.podcastData} adder={(episode) => this.addEpisode(episode)}/>
                         }/>
                     </Routes>
                 </BrowserRouter>
             </header>
         </div>
     );
+    }
 }
 
 export default App;

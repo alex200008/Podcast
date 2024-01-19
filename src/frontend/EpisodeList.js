@@ -2,10 +2,12 @@ import Episode from "./Episode";
 import Podcast from "./Podcast";
 
 function EpisodeList({episodeData, podcastData, adder}) {
+    // get podcast id
     const queryParameters = new URLSearchParams(window.location.search)
     const id = queryParameters.get("id")
-    let selectedPodcast = podcastData.find(podcast => podcast.id.toString() === id)
 
+    // get podcast and episode data
+    let selectedPodcast = podcastData.find(podcast => podcast.id.toString() === id) || {}
     const episodeList = episodeData.filter(episode => episode.podcastId === selectedPodcast.id)
         .map(episode => <Episode key={episode.id} episode={episode}/>)
 
@@ -28,7 +30,7 @@ function EpisodeList({episodeData, podcastData, adder}) {
     }
 
     return (<>
-        <Podcast key={selectedPodcast.id} podcast={selectedPodcast} active={true}/>
+        <Podcast podcast={selectedPodcast} active={true}/>
         <form method="post" onSubmit={addEpisode}>
             <input type="text" id="podcast_title" name="title"/>
             <input type="text" id="podcast_title" name="description"/>
