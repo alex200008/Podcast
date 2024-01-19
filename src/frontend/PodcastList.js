@@ -1,6 +1,7 @@
 import Podcast from "./Podcast";
 import {useState} from "react";
 import { uid } from 'uid';
+import {Link} from "react-router-dom";
 
 function PodcastList({data, adder}) {
     const podcastList = data.map(podcast => <Podcast key={podcast.id} podcast={podcast} active={false}/>)
@@ -28,6 +29,9 @@ function PodcastList({data, adder}) {
 
     return (
         <div>
+            <Link to="/search">
+                <button className="Podcast-button">Search</button>
+            </Link>
             <form method="post" onSubmit={addPodcast}>
                 <input type="text" id="podcast_title" name="title"/>
                 <input type="file" accept="image/*" onChange={handleChange}/>
